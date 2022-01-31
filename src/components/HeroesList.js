@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { TailSpin } from "react-loader-spinner";
 
 //Components
-import FlippyCard from "../FlippyCard/FlippyCard";
+import FlippyCard from "./FlippyCard";
 
 //Services
-import getHeroes from "./../../services/getHeroes";
+import getHeroes from "../services/getHeroes";
 
 export default function HeroesList() {
   const [loading, setLoading] = useState(false);

@@ -1,5 +1,5 @@
 import Flippy, { FrontSide, BackSide } from "react-flippy";
-import "./FlippyCard.css";
+import "./styles/FlippyCard.css";
 
 export default function FlippyCard({ imgUrl, name, id }) {
   return (
