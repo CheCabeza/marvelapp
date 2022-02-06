@@ -7,17 +7,20 @@ import FlippyCard from "./FlippyCard";
 //Services
 import getHeroes from "../services/getHeroes";
 
-export default function HeroesList() {
+export default function HeroesList(heroName) {
   const [loading, setLoading] = useState(false);
   const [heroes, setHeroes] = useState([]);
 
-  useEffect(function () {
-    setLoading(true);
-    getHeroes().then((heroesData) => {
-      setHeroes(heroesData);
-      setLoading(false);
-    });
-  }, []);
+  useEffect(
+    function () {
+      setLoading(true);
+      getHeroes(heroName).then((heroesData) => {
+        setHeroes(heroesData);
+        setLoading(false);
+      });
+    },
+    [heroName]
+  );
 
   if (loading) return <TailSpin />;
 

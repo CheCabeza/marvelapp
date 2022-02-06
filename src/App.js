@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 
 //Components
@@ -6,13 +6,15 @@ import HeroesList from "./components/HeroesList";
 import SearchBox from "./components/SearchBox";
 
 function App() {
+  const [keyword, setKeyword] = useState("");
+
   return (
     <div className="App">
       <section className="App-searchForm">
-        <SearchBox />
+        <SearchBox setKeyword={setKeyword} />
       </section>
       <section className="App-content">
-        <HeroesList />
+        <HeroesList heroName={keyword} />
       </section>
     </div>
   );
