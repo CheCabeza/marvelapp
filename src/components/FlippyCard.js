@@ -1,9 +1,10 @@
 import Flippy, { FrontSide, BackSide } from "react-flippy";
 import "./styles/FlippyCard.css";
 
-export default function FlippyCard({ imgUrl, name, id }) {
-  return (
+export default function FlippyCard({ heroes }) {
+  return heroes.map(({ id, imgUrl, name }) => (
     <Flippy
+      key={id}
       flipOnHover={false}
       flipOnClick={true}
       flipDirection="horizontal"
@@ -26,5 +27,5 @@ export default function FlippyCard({ imgUrl, name, id }) {
         <p>{id}</p>
       </BackSide>
     </Flippy>
-  );
+  ));
 }

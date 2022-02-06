@@ -1,30 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { TailSpin } from "react-loader-spinner";
 
 //Components
 import FlippyCard from "./FlippyCard";
 
-//Services
-import getHeroes from "../services/getHeroes";
+//Custom Hooks
+import useHeroes from "./../hooks/useHeroes";
 
 export default function HeroesList(heroName) {
-  const [loading, setLoading] = useState(false);
-  const [heroes, setHeroes] = useState([]);
-
-  useEffect(
-    function () {
-      setLoading(true);
-      getHeroes(heroName).then((heroesData) => {
-        setHeroes(heroesData);
-        setLoading(false);
-      });
-    },
-    [heroName]
-  );
+  const { loading, heroes, total } = useHeroes({ heroName });
 
   if (loading) return <TailSpin />;
+  if (total === 0 && heroName)
+    return <h2>{`Can't find hero named  ${heroName.heroName}, sorry `}</h2>;
 
-  return heroes.map(({ id, imgUrl, name }) => (
-    <FlippyCard key={id} imgUrl={imgUrl} name={name} id={id} />
-  ));
+  return <FlippyCard heroes={heroes} />;
 }
