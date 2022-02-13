@@ -1,7 +1,8 @@
+import React from "react";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
 import "./../FlippyCard/FlippyCard.css";
 
-export default function FlippyCard({ heroes }) {
+function FlippyCard({ heroes }) {
   return heroes.map(({ id, imgUrl, name }) => (
     <Flippy
       key={id}
@@ -29,3 +30,5 @@ export default function FlippyCard({ heroes }) {
     </Flippy>
   ));
 }
+
+export default React.memo(FlippyCard);

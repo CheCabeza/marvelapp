@@ -9,10 +9,8 @@ import FlippyCard from "./FlippyCard/FlippyCard";
 import useHeroes from "./../hooks/useHeroes";
 import useNearScreen from "./../hooks/useNearScreen";
 
-export default function HeroesList(heroName) {
-  const { loading, heroes, total, setHeroesCount } = useHeroes({
-    heroName,
-  });
+function HeroesList({ heroName }) {
+  const { loading, heroes, total, setHeroesCount } = useHeroes(heroName);
   const externalRef = useRef();
   const { isNearScreen } = useNearScreen({
     externalRef: loading ? null : externalRef,
@@ -21,7 +19,7 @@ export default function HeroesList(heroName) {
 
   const debounceHandleNextHeroes = useCallback(
     debounce(
-      () => setHeroesCount((prevHeroesCount) => prevHeroesCount + 20),
+      () => setHeroesCount((prevHeroesCount) => prevHeroesCount + 21),
       1000
     ),
     [setHeroesCount]
@@ -29,15 +27,14 @@ export default function HeroesList(heroName) {
 
   useEffect(
     function () {
-      console.log(isNearScreen);
       if (isNearScreen) debounceHandleNextHeroes();
     },
     [debounceHandleNextHeroes, isNearScreen]
   );
 
   // if (loading) return <TailSpin />;
-  if (total === 0 && heroName.length === 0)
-    return <h2>{`Can't find hero named  ${heroName.heroName}, sorry `}</h2>;
+  if (total === 0 && heroName)
+    return <h2>{`Can't find hero named  ${heroName}, sorry `}</h2>;
 
   return (
     <>
@@ -46,10 +43,12 @@ export default function HeroesList(heroName) {
       ) : (
         <>
           <FlippyCard heroes={heroes} />
-          <div id="checker" ref={externalRef} />
+          {heroes.length > 15 && <div id="checker" ref={externalRef} />}
           {loading ? <TailSpin /> : null}
         </>
       )}
     </>
   );
 }
+
+export default React.memo(HeroesList);

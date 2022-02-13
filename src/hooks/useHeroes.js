@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 //Services
 import getHeroes from "../services/getHeroes";
 
-export default function useHeroes({ heroName }) {
+export default function useHeroes(heroName) {
   const [loading, setLoading] = useState(false);
   const [heroes, setHeroes] = useState([]);
   const [total, setTotal] = useState(0);
@@ -12,10 +12,15 @@ export default function useHeroes({ heroName }) {
   useEffect(
     function () {
       setLoading(true);
-      getHeroes({ heroName, heroesCount }).then((heroesData) => {
+      getHeroes({ heroName }, heroesCount).then((heroesData) => {
+        console.log(heroName);
         heroName
           ? setHeroes(heroesData.heroes)
-          : setHeroes((prevHeroes) => prevHeroes.concat(heroesData.heroes));
+          : setHeroes((prevHeroes) => {
+              if (prevHeroes.length > 1)
+                return prevHeroes.concat(heroesData.heroes);
+              if (prevHeroes.length <= 1) return heroesData.heroes;
+            });
         setTotal(heroesData.total);
         setLoading(false);
       });
