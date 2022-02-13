@@ -1,7 +1,7 @@
 import generateURL from "./generateURL";
 
-export default function getHeroes({ heroName }) {
-  return fetch(generateURL(heroName))
+export default function getHeroes({ heroName, heroesCount }) {
+  return fetch(generateURL(heroName, heroesCount))
     .then((res) => res.json())
     .then((response) => {
       const { data } = response;

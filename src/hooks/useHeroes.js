@@ -7,18 +7,19 @@ export default function useHeroes({ heroName }) {
   const [loading, setLoading] = useState(false);
   const [heroes, setHeroes] = useState([]);
   const [total, setTotal] = useState(0);
+  const [heroesCount, setHeroesCount] = useState(0);
 
   useEffect(
     function () {
       setLoading(true);
-      getHeroes(heroName).then((heroesData) => {
-        setHeroes(heroesData.heroes);
+      getHeroes({ heroName, heroesCount }).then((heroesData) => {
+        setHeroes((prevHeroes) => prevHeroes.concat(heroesData.heroes));
         setTotal(heroesData.total);
         setLoading(false);
       });
     },
-    [heroName]
+    [heroName, heroesCount]
   );
 
-  return { loading, heroes, total };
+  return { loading, heroes, total, setHeroesCount };
 }

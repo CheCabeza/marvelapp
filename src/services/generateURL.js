@@ -2,10 +2,10 @@ let md5 = require("md5");
 const timestamp = require("time-stamp");
 let ts = timestamp();
 
-export default function chooseURL(heroName) {
+export default function generateURL({ heroName }, heroesCount) {
   const ALL_HEROES_LIST = `${
     process.env.REACT_APP_API_URL
-  }/characters?limit=100&ts=${ts}&apikey=${
+  }/characters?limit=20&offset=${heroesCount}&ts=${ts}&apikey=${
     process.env.REACT_APP_API_PUBLIC_KEY
   }&hash=${md5(
     `${ts}${process.env.REACT_APP_API_PRIVATE_KEY}${process.env.REACT_APP_API_PUBLIC_KEY}`
