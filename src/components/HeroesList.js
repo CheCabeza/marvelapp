@@ -3,7 +3,7 @@ import { TailSpin } from "react-loader-spinner";
 import debounce from "just-debounce-it";
 
 //Components
-import FlippyCard from "./FlippyCard";
+import FlippyCard from "./FlippyCard/FlippyCard";
 
 //Custom Hooks
 import useHeroes from "./../hooks/useHeroes";

@@ -13,7 +13,9 @@ export default function useHeroes({ heroName }) {
     function () {
       setLoading(true);
       getHeroes({ heroName, heroesCount }).then((heroesData) => {
-        setHeroes((prevHeroes) => prevHeroes.concat(heroesData.heroes));
+        heroName
+          ? setHeroes(heroesData.heroes)
+          : setHeroes((prevHeroes) => prevHeroes.concat(heroesData.heroes));
         setTotal(heroesData.total);
         setLoading(false);
       });

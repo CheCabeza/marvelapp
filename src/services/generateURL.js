@@ -13,8 +13,9 @@ export default function generateURL({ heroName }, heroesCount) {
 
   const HEROES_BY_NAME_LIST = `${
     process.env.REACT_APP_API_URL
-  }/characters?name=${heroName}
-    &ts=${ts}&apikey=${process.env.REACT_APP_API_PUBLIC_KEY}&hash=${md5(
+  }/characters?name=${heroName}&orderBy=name&ts=${ts}&apikey=${
+    process.env.REACT_APP_API_PUBLIC_KEY
+  }&hash=${md5(
     `${ts}${process.env.REACT_APP_API_PRIVATE_KEY}${process.env.REACT_APP_API_PUBLIC_KEY}`
   )}`;
 

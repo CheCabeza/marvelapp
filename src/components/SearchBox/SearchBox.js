@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import "./../SearchBox/SearchBox.css";
+import { FaSearch } from "react-icons/fa";
 
 export default function SearchBox({ setKeyword }) {
   const [heroSearchName, setHeroSearchName] = useState("");
@@ -13,14 +15,17 @@ export default function SearchBox({ setKeyword }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="search">
       <input
+        className="searchTerm"
         placeholder="Search Hero..."
         onChange={handleChange}
         type="text"
         value={heroSearchName}
       />
-      <button>Search</button>
+      <button className="searchButton">
+        <FaSearch />
+      </button>
     </form>
   );
 }

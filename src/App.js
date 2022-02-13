@@ -3,7 +3,7 @@ import "./App.css";
 
 //Components
 import HeroesList from "./components/HeroesList";
-import SearchBox from "./components/SearchBox";
+import SearchBox from "./components/SearchBox/SearchBox";
 
 function App() {
   const [keyword, setKeyword] = useState("");
