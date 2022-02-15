@@ -1,32 +1,40 @@
 import { useState, useEffect } from "react";
 
 //Services
-import getHeroes from "../services/getHeroes";
+import { getHeroes, getHero } from "../services/getHeroes";
 
-export default function useHeroes(heroName) {
+export default function useHeroes(heroName, filter) {
   const [loading, setLoading] = useState(false);
   const [heroes, setHeroes] = useState([]);
+  const [hero, setHero] = useState([]);
   const [total, setTotal] = useState(0);
   const [heroesCount, setHeroesCount] = useState(0);
 
   useEffect(
     function () {
       setLoading(true);
-      getHeroes({ heroName }, heroesCount).then((heroesData) => {
-        console.log(heroName);
-        heroName
-          ? setHeroes(heroesData.heroes)
-          : setHeroes((prevHeroes) => {
-              if (prevHeroes.length > 1)
-                return prevHeroes.concat(heroesData.heroes);
-              if (prevHeroes.length <= 1) return heroesData.heroes;
-            });
+      getHeroes(heroesCount, filter).then((heroesData) => {
+        setHeroes((prevHeroes) => {
+          return prevHeroes.concat(heroesData.heroes);
+        });
         setTotal(heroesData.total);
         setLoading(false);
       });
     },
-    [heroName, heroesCount]
+    [heroesCount, filter]
   );
 
-  return { loading, heroes, total, setHeroesCount };
+  useEffect(
+    function () {
+      setLoading(true);
+      getHero(heroName).then((heroesData) => {
+        setHero(heroesData.hero);
+        setTotal(heroesData.total);
+        setLoading(false);
+      });
+    },
+    [heroName]
+  );
+
+  return { loading, heroes, hero, total, setHeroesCount };
 }

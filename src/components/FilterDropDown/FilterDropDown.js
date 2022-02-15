@@ -10,8 +10,8 @@ export default function FilterDropDown({ setFilter }) {
     { value: "-modified", label: "Last modified" },
   ];
 
-  const handleChange = (value) => {
-    setFilter(value);
+  const handleChange = (event) => {
+    setFilter(event.value);
   };
 
   return (
@@ -19,7 +19,6 @@ export default function FilterDropDown({ setFilter }) {
       className="FilterDropDown"
       options={options}
       onChange={handleChange}
-      value={"Filter"}
       placeholder="Filter"
     />
   );

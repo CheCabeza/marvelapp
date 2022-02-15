@@ -11,3 +11,14 @@ img {
   align-items: center;
   font-size: large;
 }
+
+a {
+  font-size: x-large;
+  color: green;
+  text-decoration: none;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+}
