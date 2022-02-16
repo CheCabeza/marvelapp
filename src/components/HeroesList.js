@@ -21,6 +21,7 @@ function HeroesList(props) {
     once: false,
   });
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debounceHandleNextHeroes = useCallback(
     debounce(
       () => setHeroesCount((prevHeroesCount) => prevHeroesCount + 21),
@@ -35,9 +36,6 @@ function HeroesList(props) {
     },
     [debounceHandleNextHeroes, isNearScreen]
   );
-  useEffect(() => {
-    console.log(heroName);
-  }, [heroName]);
 
   // if (loading) return <TailSpin />;
   if (total === 0 && heroName)

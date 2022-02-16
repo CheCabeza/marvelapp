@@ -12,16 +12,31 @@ export default function useHeroes(heroName, filter) {
 
   useEffect(
     function () {
-      setLoading(true);
-      getHeroes(heroesCount, filter).then((heroesData) => {
-        setHeroes((prevHeroes) => {
-          return prevHeroes.concat(heroesData.heroes);
+      if (heroesCount <= total) {
+        setLoading(true);
+        getHeroes(heroesCount, filter).then((heroesData) => {
+          setHeroes((prevHeroes) => {
+            return prevHeroes.concat(heroesData.heroes);
+          });
+          setTotal(heroesData.total);
+          setLoading(false);
         });
+      }
+    },
+    [heroesCount]
+  );
+
+  useEffect(
+    function () {
+      setHeroesCount(0);
+      setLoading(true);
+      getHeroes(0, filter).then((heroesData) => {
+        setHeroes(heroesData.heroes);
         setTotal(heroesData.total);
         setLoading(false);
       });
     },
-    [heroesCount, filter]
+    [filter]
   );
 
   useEffect(
