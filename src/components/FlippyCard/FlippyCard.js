@@ -5,11 +5,11 @@ import "./../FlippyCard/FlippyCard.css";
 function FlippyCard({ heroes }) {
   return heroes.map(({ id, imgUrl, name, links }) => (
     <Flippy
-      key={id}
       flipOnHover={false}
       flipOnClick={true}
       flipDirection="horizontal"
       style={{ width: "400px", height: "450px", margin: 30 }}
+      key={id}
     >
       <FrontSide
         style={{
@@ -25,31 +25,31 @@ function FlippyCard({ heroes }) {
       </FrontSide>
       <BackSide
         style={{
-          backgroundImage: `url(${imgUrl})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          opacity: 0.5,
+          backgroundColor: "#183A37",
           borderRadius: 30,
+          padding: 0,
           display: "flex",
-          justifyContent: "center",
-          padding: 40,
+          flexDirection: "column",
         }}
       >
-        <div>
-          DETAILS
-          <p>{id}</p>
-          LINKS
-          <div className="links">
-            {links.map((links) => {
-              return (
-                <p style={{ marginRight: 20 }}>
-                  <a href={links.url} target="_blank" rel="noreferrer">
-                    {links.type}
-                  </a>
-                </p>
-              );
-            })}
-          </div>
+        <img className="back-img" alt={"Not Found"} src={imgUrl} />
+        <p>ID: {id}</p>
+        LINKS:
+        <div className="links">
+          {links.map((link, index) => {
+            return (
+              <div key={index}>
+                <a
+                  style={{ marginRight: 20 }}
+                  href={link.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {link.type}
+                </a>
+              </div>
+            );
+          })}
         </div>
       </BackSide>
     </Flippy>

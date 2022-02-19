@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 //Services
 import { getHeroes, getHero } from "../services/getHeroes";
@@ -13,11 +13,10 @@ export default function useHeroes(heroName, filter) {
   useEffect(
     function () {
       if (heroesCount <= total) {
+        //Keep adding heroes to the list when count is below total ammount
         setLoading(true);
         getHeroes(heroesCount, filter).then((heroesData) => {
-          setHeroes((prevHeroes) => {
-            return prevHeroes.concat(heroesData.heroes);
-          });
+          setHeroes([...heroes, ...heroesData.heroes]);
           setTotal(heroesData.total);
           setLoading(false);
         });
@@ -28,7 +27,6 @@ export default function useHeroes(heroName, filter) {
 
   useEffect(
     function () {
-      setHeroesCount(0);
       setLoading(true);
       getHeroes(0, filter).then((heroesData) => {
         setHeroes(heroesData.heroes);
@@ -41,12 +39,14 @@ export default function useHeroes(heroName, filter) {
 
   useEffect(
     function () {
-      setLoading(true);
-      getHero(heroName).then((heroesData) => {
-        setHero(heroesData.hero);
-        setTotal(heroesData.total);
-        setLoading(false);
-      });
+      if (heroName.length) {
+        setLoading(true);
+        getHero(heroName).then((heroesData) => {
+          setHero(heroesData.hero);
+          setTotal(heroesData.total);
+          setLoading(false);
+        });
+      }
     },
     [heroName]
   );

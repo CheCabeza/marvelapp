@@ -37,9 +37,13 @@ function HeroesList(props) {
     [debounceHandleNextHeroes, isNearScreen]
   );
 
+  useEffect(() => {
+    console.log(heroes);
+  }, [heroes]);
+
   // if (loading) return <TailSpin />;
   if (total === 0 && heroName)
-    return <h2>{`Can't find hero named  ${props.heroName}, sorry `}</h2>;
+    return <h2>{`Can't find hero named  ${heroName}, sorry `}</h2>;
 
   return (
     <>
