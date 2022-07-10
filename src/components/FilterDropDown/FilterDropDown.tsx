@@ -1,8 +1,9 @@
+import React from "react";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import "./../FilterDropDown/FilterDropDown.css";
 
-export default function FilterDropDown({ setFilter }) {
+export default function FilterDropDown({ setFilter }: any) {
   const options = [
     { value: "name", label: "A-Z" },
     { value: "-name", label: "Z-A" },
@@ -10,7 +11,7 @@ export default function FilterDropDown({ setFilter }) {
     { value: "-modified", label: "Last modified" },
   ];
 
-  const handleChange = (event) => {
+  const handleChange = (event: any) => {
     setFilter(event.value);
   };
 
