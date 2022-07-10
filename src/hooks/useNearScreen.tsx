@@ -9,7 +9,7 @@ export default function useNearScreen({
   const fromRef = useRef();
 
   useEffect(() => {
-    let observer;
+    let observer: any;
 
     const element = externalRef ? externalRef.current : fromRef.current;
 

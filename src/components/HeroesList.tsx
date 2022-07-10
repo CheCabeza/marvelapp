@@ -6,8 +6,8 @@ import debounce from "just-debounce-it";
 import FlippyCard from "./FlippyCard/FlippyCard";
 
 //Custom Hooks
-import useHeroes from "./../hooks/useHeroes";
-import useNearScreen from "./../hooks/useNearScreen";
+import useHeroes from "../hooks/useHeroes";
+import useNearScreen from "../hooks/useNearScreen";
 
 function HeroesList(props) {
   const { heroName, filter } = props;
